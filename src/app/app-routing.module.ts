@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AppComponent} from "./app.component";
+import {LoginComponent} from "./login/login.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {AuthService} from "./services/auth.service";
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: AppComponent},
+  {path: 'login', component: LoginComponent, canLoad: [!AuthService]},
+  {path: 'dashboard', component: DashboardComponent, canLoad: [AuthService]},
+  {path: 'user', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

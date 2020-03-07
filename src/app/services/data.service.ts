@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class DataService {
 
   public baseUrl = 'http://localhost:9090';
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
   /**
      * Function to send get request.

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import {Router} from "@angular/router";
-import {DataService} from "../services/data.service";
-import {UserModel} from "../services/model.service";
-import {map} from "rxjs/operators";
+import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
+import {DataService} from '../services/data.service';
+import {UserModel} from '../services/model.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +16,8 @@ export class DashboardComponent implements OnInit {
   user = {} as  UserModel;
   constructor(private authService: AuthService, private router: Router, private dataService: DataService) {
     this.CURRENT_USER = this.authService.currentUserValue;
-    this.user = (<UserModel>JSON.parse(this.CURRENT_USER.body));
-    //this.router.navigate(['user/home']);
+    this.user = (JSON.parse(this.CURRENT_USER.body) as UserModel);
+    // this.router.navigate(['user/home']);
   }
 
   ngOnInit() {

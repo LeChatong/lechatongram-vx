@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./services/auth.service";
-import {NavigationEnd, Router} from "@angular/router";
-import {UserModel} from "./services/model.service";
+import {AuthService} from './services/auth.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {UserModel} from './services/model.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,13 @@ export class AppComponent {
   CURRENT_USER: UserModel;
 
   constructor(private authService: AuthService, private router: Router) {
+    this.authService.currentUser.subscribe(x => this.CURRENT_USER = x);
+
+    if (this.CURRENT_USER) {
+      router.navigate(['user/home']);
+    } else {
+      router.navigate(['login']);
+    }
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         if (val.urlAfterRedirects === '/login') {
@@ -24,19 +31,7 @@ export class AppComponent {
         }
       }
     });
-
-    /*this.authService.currentUser.subscribe(x => this.CURRENT_USER = x);
-
-    if(this.CURRENT_USER){
-      this.isLogin = false;
-      router.navigate(['dashboard']);
-    }else{
-      this.isLogin = true;
-      router.navigate(['login']);
-    }*/
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

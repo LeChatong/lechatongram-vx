@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {AuthService} from "./services/auth.service";
+import {AuthService} from './services/auth.service';
 import { LoginComponent } from './login/login.component';
-import { Route } from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import {DataService} from "./services/data.service";
+import { Route } from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {DataService} from './services/data.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {UsersModule} from "./users/users.module";
+import {UsersModule} from './users/users.module';
+import {UsersServices} from './services/users.services';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {UsersModule} from "./users/users.module";
     AppRoutingModule,
     UsersModule
   ],
-  providers: [AuthService, DataService],
+  providers: [AuthService, DataService, UsersServices],
   bootstrap: [AppComponent]
 })
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {APIResponse, UserModel} from './model.service';
+import {APIResponse, Login, UserModel} from './model.service';
 import {stringify} from 'querystring';
 import {JsonFormatter} from 'tslint/lib/formatters';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
@@ -15,13 +15,13 @@ import {
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {DataService} from './data.service';
 
 @Injectable()
 export class AuthService implements CanLoad {
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('CURRENT_USER')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -29,7 +29,7 @@ export class AuthService implements CanLoad {
   public get currentUserValue(): UserModel {
         return this.currentUserSubject.getValue();
   }
-  private currentUserSubject: BehaviorSubject<UserModel>;
+  public currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
 
 
@@ -41,15 +41,9 @@ export class AuthService implements CanLoad {
     }
   }
 
-  signIn(username, email) {
-    return this.dataService.get(`/user/find/${username}/${email}`)
-      .pipe(
-        map(user => {
-          localStorage.setItem('CURRENT_USER', JSON.stringify(user));
-          this.currentUserSubject.next((user));
-          return user;
-        })
-      );
+  signIn(login: Login) {
+    const params = new HttpParams().set('username', login.username).set('email', login.email)
+    return this.http.post(`${this.dataService.baseUrl}/user/login`, params);
 
   }
 

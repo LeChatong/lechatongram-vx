@@ -11,7 +11,10 @@ import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {UsersModule} from './users/users.module';
-import {UsersServices} from './services/users.services';
+import {UsersService} from './services/user/users.service';
+import {MoviesService} from './services/movie/movies.service';
+import {MemberService} from './services/member/member.service';
+import {TvService} from './services/tv/tv.service';
 
 
 @NgModule({
@@ -27,7 +30,7 @@ import {UsersServices} from './services/users.services';
     AppRoutingModule,
     UsersModule
   ],
-  providers: [AuthService, DataService, UsersServices],
+  providers: [AuthService, DataService, UsersService, MoviesService, TvService, MemberService],
   bootstrap: [AppComponent]
 })
 

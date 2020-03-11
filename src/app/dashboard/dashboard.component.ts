@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   user = {} as  UserModel;
   constructor(private authService: AuthService, private router: Router, private dataService: DataService) {
     this.CURRENT_USER = this.authService.currentUserValue;
-    this.user = (JSON.parse(this.CURRENT_USER.body) as UserModel);
+    this.user = this.CURRENT_USER as UserModel;
     // this.router.navigate(['user/home']);
   }
 

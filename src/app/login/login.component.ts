@@ -35,17 +35,19 @@ export class LoginComponent implements OnInit {
 
   onSignIn() {
     showLoader(true);
-    this.authService.signIn(this.login.username, this.login.email)
-      .pipe(first())
+    this.authService.signIn(this.login)
       .subscribe(
-        data => {
+        (user: APIResponse) => {
+          console.log(user.data);
+          localStorage.setItem('CURRENT_USER', JSON.stringify(user.data));
+          this.authService.currentUserSubject.next(user.data);
           showLoader(false);
           this.router.navigate(['user/home']);
         },
         error1 => {
           showLoader(false);
           this.message = 'Erreur Serveur !';
-          location.reload();
+          //location.reload();
         }
       );
 

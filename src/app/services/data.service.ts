@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class DataService {
 
-  public baseUrl = 'http://localhost:9090';
+  public baseUrl = 'http://localhost:9090/microchatong';
 
   constructor(private http: HttpClient) {}
 

@@ -12,4 +12,7 @@ export class TvService {
   public listAllTv() {
     return this.http.get(`${this.dataService.baseUrl}/tv/list`);
   }
+  public listAllTvAv() {
+    return this.http.get(`${this.dataService.baseUrl}/tv/avaible`);
+  }
 }

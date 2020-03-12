@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   NB_MEMBER: number;
   NB_MOVIE: number;
   NB_EPISODE: number;
+  NB_TV: number;
   constructor(private dataService: DataService, private userService: UsersService,
               private movieService: MoviesService, private tvService: TvService, private memberService: MemberService) {
     this.initView();
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.getListMovies();
     this.getListMembers();
     this.getListTvs();
+    this.getListTvsAv();
   }
   getListUser() {
     this.userService.listAllUsers().subscribe(
@@ -59,6 +61,15 @@ export class DashboardComponent implements OnInit {
       (tvs: APIResponse) => {
         this.listTv = tvs.data;
         this.NB_EPISODE = this.listTv.length;
+      }
+    );
+  }
+  getListTvsAv() {
+    this.tvService.listAllTvAv().subscribe(
+      (tvs: APIResponse) => {
+        this.listTv = tvs.data;
+        console.log(tvs.data);
+        this.NB_TV = this.listTv.length;
       }
     );
   }

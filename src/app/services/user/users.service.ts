@@ -12,4 +12,8 @@ export class UsersService {
   public listAllUsers() {
     return this.http.get(`${this.dataService.baseUrl}/user/list`);
   }
+
+  public getUserById(id: number) {
+    return this.http.get(`${this.dataService.baseUrl}/user/${id}`);
+  }
 }

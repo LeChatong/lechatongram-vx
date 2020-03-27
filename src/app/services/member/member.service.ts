@@ -12,4 +12,8 @@ export class MemberService {
   public listAllMember() {
     return this.http.get(`${this.dataService.baseUrl}/member/list`);
   }
+
+  public getMember(id: number) {
+    return this.http.get(`${this.dataService.baseUrl}/member/${id}`);
+  }
 }

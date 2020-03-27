@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {APIResponse, MemberModel, MovieModel, TvModel, UserModel} from '../../services/model.service';
+import {APIResponse, CommentModel, MemberModel, MovieModel, TvModel, UserModel} from '../../services/model.service';
 import {DataService} from '../../services/data.service';
 import {HttpResponse} from '@angular/common/http';
 import {UsersService} from '../../services/user/users.service';
@@ -8,6 +8,7 @@ import {first} from 'rxjs/operators';
 import {MoviesService} from '../../services/movie/movies.service';
 import {TvService} from '../../services/tv/tv.service';
 import {MemberService} from '../../services/member/member.service';
+import {CommentService} from '../../services/comment/comment.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,13 +21,16 @@ export class DashboardComponent implements OnInit {
   listMovies: Array<MovieModel>;
   listTv: Array<TvModel>;
   listMember: Array<MemberModel>;
+  listComment: Array<CommentModel>;
   NB_USER: number;
   NB_MEMBER: number;
   NB_MOVIE: number;
   NB_EPISODE: number;
   NB_TV: number;
+  NB_COMMENT: number;
   constructor(private dataService: DataService, private userService: UsersService,
-              private movieService: MoviesService, private tvService: TvService, private memberService: MemberService) {
+              private movieService: MoviesService, private tvService: TvService,
+              private memberService: MemberService, private commentService: CommentService) {
     this.initView();
   }
 
@@ -39,6 +43,7 @@ export class DashboardComponent implements OnInit {
     this.getListMembers();
     this.getListTvs();
     this.getListTvsAv();
+    this.getListComments();
   }
   getListUser() {
     this.userService.listAllUsers().subscribe(
@@ -68,7 +73,6 @@ export class DashboardComponent implements OnInit {
     this.tvService.listAllTvAv().subscribe(
       (tvs: APIResponse) => {
         this.listTv = tvs.data;
-        console.log(tvs.data);
         this.NB_TV = this.listTv.length;
       }
     );
@@ -78,6 +82,19 @@ export class DashboardComponent implements OnInit {
       (members: APIResponse) => {
         this.listMember = members.data;
         this.NB_MEMBER = this.listMember.length;
+      }
+    );
+  }
+  getListComments() {
+    this.commentService.listAllComment().subscribe(
+      (comments: APIResponse) => {
+        if (comments.status === 200) {
+          this.listComment = comments.data;
+          this.NB_COMMENT = this.listComment.length;
+        } else {
+          this.NB_COMMENT = 0;
+        }
+
       }
     );
   }

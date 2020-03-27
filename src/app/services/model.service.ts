@@ -69,3 +69,19 @@ export class MemberModel {
   is_modarator?: boolean;
   avatar?: string;
 }
+
+export class CommentModel {
+  id?: number;
+  name_sender: string;
+  message: string;
+  email_sender?: string;
+  id_movie?: number;
+  id_tv?: number;
+  is_reply?: boolean;
+  is_delete?: boolean;
+  is_locked?: boolean;
+  comment_parent_id?: number;
+  member_id?: number;
+  created_at?: Date;
+  updated_at?: Date;
+}

@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Liste des Films</h1>
+  </div>
+  <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All users register</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Titre</th>
+                      <th>Lien de téléchargement</th>
+                      <th>Langue</th>
+                      <th>Ajouté le</th>
+                      <th>Ajouté par</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>N°</th>
+                      <th>Titre</th>
+                      <th>Lien de téléchargement</th>
+                      <th>Langue</th>
+                      <th>Ajouté le</th>
+                      <th>Ajouté par</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr *ngFor='let movie of listMovie;'>
+                      <td>{{movie.title_movie}}</td>
+                      <td>{{movie.link_download}}</td>
+                      <td>{{movie.voice_language}}</td>
+                      <td>{{movie.created_at|date}}</td>
+                      <td>{{nameMember(movie.member_id)}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+</div>

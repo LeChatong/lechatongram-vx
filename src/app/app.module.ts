@@ -15,22 +15,25 @@ import {UsersService} from './services/user/users.service';
 import {MoviesService} from './services/movie/movies.service';
 import {MemberService} from './services/member/member.service';
 import {TvService} from './services/tv/tv.service';
+import {CommentService} from './services/comment/comment.service';
+import {MoviesModule} from './movies/movies.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    UsersModule
+    UsersModule,
+    MoviesModule
   ],
-  providers: [AuthService, DataService, UsersService, MoviesService, TvService, MemberService],
+  providers: [AuthService, DataService, UsersService, MoviesService, TvService, MemberService, CommentService],
   bootstrap: [AppComponent]
 })
 
